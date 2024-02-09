@@ -5,11 +5,15 @@ RUN adduser --shell /bin/bash --uid 1001 app
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-
-USER root
 RUN bundle install
+
+COPY bot.rb Rakefile ./
+COPY lib ./lib
+COPY start.sh ./
+
 RUN chown -R app:app /app
+RUN chmod +x start.sh
 
 USER app
 
-CMD ["ruby", "bot.rb"]
+CMD ["./start.sh"]
