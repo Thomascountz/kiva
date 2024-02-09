@@ -1,2 +1,3 @@
 .env
 vendor/
+client_secret.json
